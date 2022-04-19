@@ -24,6 +24,24 @@ export class DwgComponent implements OnInit, AfterViewInit {
 
     public svgfile(): void {
 
+        // const map = new Map({
+        //   target: 'map',
+        //   layers: [
+        //     new ol.layer.Image({
+        //       source: new ol.source.ImageStatic({
+        //         url: 'data:image/svg+xml,' + encodeURIComponent(content),
+        //         imageExtent: [0, 0, 5e6, 5e6],
+        //       })
+        //     })
+        //   ] ,view : new View({
+        //             center: [0, 0],
+        //             extent: [-180, -90, 180, 90],
+        //             projection: 'EPSG:4326',
+        //             zoom: 2,
+        //         }),
+        // });
+
+
         var map = new Map({
             target: 'map',
             view: new View({
@@ -36,23 +54,25 @@ export class DwgComponent implements OnInit, AfterViewInit {
 
         var svgContainer = document.createElement('div');
         var xhr = new XMLHttpRequest;
-        xhr.open('get', 'img/longitude.svg', true);
+        xhr.open('get', 'assets/img/model.svg');
         // If specified, responseType must be empty string or "document"
-        xhr.responseType = 'document';
-
+     //   xhr.responseType = 'document';
         // Force the response to be parsed as XML
-        xhr.overrideMimeType('text/xml');
+     //   xhr.overrideMimeType('text/xml');
         xhr.addEventListener('load', function () {
-            var svg = xhr.responseXML?.documentElement;
+            var svg:any = xhr.responseXML?.documentElement;
         //   svg = document.importNode(svg,true); // surprisingly optional in these browsers
         //  document.body.appendChild(svg);
-            // svgContainer.ownerDocument.importNode(svg);
-            // svgContainer.appendChild(svg);
+            svgContainer.ownerDocument.importNode(svg);
+            svgContainer.appendChild(svg);
         });
-
-
         xhr.send();
+        // xhr.onreadystatechange = function() {
+        //     if(this.readyState == this.HEADERS_RECEIVED) {
+        //       console.log(xhr.getResponseHeader("Content-Type"));
+        //     }
 
+        // }
         const width = 2560;
         const height = 1280;
         const svgResolution = 360 / width;
@@ -77,7 +97,7 @@ export class DwgComponent implements OnInit, AfterViewInit {
                         center[1] / svgResolution - height / 2
                     );
                     svgContainer.style.transform = cssTransform;
-                    // svgContainer.style.opacity = this.getOpacity();
+                    svgContainer.style.opacity = '0.5';
                     return svgContainer;
                 },
             })
