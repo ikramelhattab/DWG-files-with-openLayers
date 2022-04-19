@@ -54,7 +54,7 @@ export class DwgComponent implements OnInit, AfterViewInit {
 
         var svgContainer = document.createElement('div');
         var xhr = new XMLHttpRequest;
-        xhr.open('get', 'assets/img/0-dwgmodels.com.svg');
+        xhr.open('get', 'assets/data/0-dwgmodels.com.svg');
         // If specified, responseType must be empty string or "document"
      //   xhr.responseType = 'document';
         // Force the response to be parsed as XML
@@ -97,7 +97,7 @@ export class DwgComponent implements OnInit, AfterViewInit {
                         center[1] / svgResolution - height / 2
                     );
                     svgContainer.style.transform = cssTransform;
-                    svgContainer.style.opacity = '0.5';
+                    svgContainer.style.opacity = '0.4';
                     return svgContainer;
                 },
             })

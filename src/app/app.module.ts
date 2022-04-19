@@ -9,7 +9,7 @@ import { DwgComponent } from './dwg.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DwgComponent
+    DwgComponent,
 
   ],
   imports: [
