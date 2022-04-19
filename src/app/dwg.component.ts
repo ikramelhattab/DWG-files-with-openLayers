@@ -13,17 +13,18 @@ import { composeCssTransform } from 'ol/transform';
 })
 export class DwgComponent implements OnInit, AfterViewInit {
     title = 'dwg';
-
+    public svg :any;
 
     ngOnInit(): void {
     }
+
     public ngAfterViewInit(): void {
         this.svgfile();
     }
 
     public svgfile(): void {
 
-        const map = new Map({
+        var map = new Map({
             target: 'map',
             view: new View({
                 center: [0, 0],
@@ -33,8 +34,8 @@ export class DwgComponent implements OnInit, AfterViewInit {
             }),
         });
 
-        const svgContainer = document.createElement('div');
-        var xhr = new XMLHttpRequest();
+        var svgContainer = document.createElement('div');
+        var xhr = new XMLHttpRequest;
         xhr.open('get', 'img/longitude.svg', true);
         // If specified, responseType must be empty string or "document"
         xhr.responseType = 'document';
@@ -42,15 +43,14 @@ export class DwgComponent implements OnInit, AfterViewInit {
         // Force the response to be parsed as XML
         xhr.overrideMimeType('text/xml');
         xhr.addEventListener('load', function () {
-            var svg = xhr.responseXML.documentElement;
-            svgContainer.ownerDocument.importNode(svg);
-            svgContainer.appendChild(svg);
+            var svg = xhr.responseXML?.documentElement;
+        //   svg = document.importNode(svg,true); // surprisingly optional in these browsers
+        //  document.body.appendChild(svg);
+            // svgContainer.ownerDocument.importNode(svg);
+            // svgContainer.appendChild(svg);
         });
 
 
-        // // svg = document.importNode(svg,true); // surprisingly optional in these browsers
-        //  document.body.appendChild(svg);
-        //
         xhr.send();
 
         const width = 2560;
@@ -77,7 +77,7 @@ export class DwgComponent implements OnInit, AfterViewInit {
                         center[1] / svgResolution - height / 2
                     );
                     svgContainer.style.transform = cssTransform;
-                    svgContainer.style.opacity = this.getOpacity();
+                    // svgContainer.style.opacity = this.getOpacity();
                     return svgContainer;
                 },
             })
