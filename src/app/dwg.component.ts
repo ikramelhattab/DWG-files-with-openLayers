@@ -54,7 +54,7 @@ export class DwgComponent implements OnInit, AfterViewInit {
 
         var svgContainer = document.createElement('div');
         var xhr = new XMLHttpRequest;
-        xhr.open('get', 'assets/img/model.svg');
+        xhr.open('get', 'assets/img/0-dwgmodels.com.svg');
         // If specified, responseType must be empty string or "document"
      //   xhr.responseType = 'document';
         // Force the response to be parsed as XML
